@@ -1,1 +1,1 @@
-export { default } from "./calculateCanvasPermeter";
+export { default } from "./calculateCanvasPerimeter";

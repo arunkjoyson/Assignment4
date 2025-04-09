@@ -3,13 +3,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const calculateCanvasSize_1 = __importDefault(require("./calculateCanvasSize"));
 const paintRequiredCalculator_1 = __importDefault(require("./paintRequiredCalculator"));
+function calculateTriangleArea(width, height) {
+    const base = width / 3;
+    return 0.5 * base * height;
+}
 function main() {
-    const area = (0, calculateCanvasSize_1.default)("10", "20");
+    const width = 3; // in meters
+    const height = 2; // in meters
+    const copies = 5000;
     const coveragePerLiter = 11.4;
-    const paintRequired = (0, paintRequiredCalculator_1.default)(area, coveragePerLiter);
-    console.log(`${paintRequired} is required to cover ${area} of canvas.`);
+    const triangleArea = calculateTriangleArea(width, height);
+    const totalPaintedArea = triangleArea * copies;
+    const paintRequired = (0, paintRequiredCalculator_1.default)(totalPaintedArea, coveragePerLiter);
+    console.log(`🎨 Paint required for ${copies} copies: ${paintRequired.toFixed(2)} liters`);
 }
 main();
+// This code calculates the amount of paint required for a triangular area, given its width and height.
+// It uses the `paintRequiredCalculator` function to determine the amount of paint needed based on the total area and coverage per liter.
+// The `calculateTriangleArea` function computes the area of a triangle using the formula: (base * height) / 2.
+// The base is calculated as one-third of the width.
+// The `main` function sets the dimensions of the triangle, the number of copies, and the coverage per liter.
+// It then calculates the total painted area and the amount of paint required, logging the result to the console.
 //# sourceMappingURL=main.js.map
