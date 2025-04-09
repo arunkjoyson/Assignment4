@@ -10,20 +10,37 @@ function calculateTriangleArea(width: number, height: number): number {
 function main() {
   const width = 3;  // Rectangle width in meters
   const height = 2; // Rectangle height in meters
-  const copies = 5000; // Number of copies
   const coveragePerLiter = 11.4; // Coverage in m² per liter
 
-  // Calculate the area of one triangle
-  const triangleArea = calculateTriangleArea(width, height);
+  // Prompt the user to enter the number of copies
+  process.stdout.write("Enter the number of copies: ");
 
-  // Total area to be painted (for all copies)
-  const totalPaintedArea = triangleArea * copies;
+  // Read the input from stdin
+  process.stdin.once('data', (data) => {
+    const copies = parseInt(data.toString().trim());  // Convert the input to an integer
 
-  // Calculate the amount of paint required using the paint calculator
-  const paintRequired = paintRequiredCalculator(totalPaintedArea, coveragePerLiter);
+    // Validate input (number of copies should be positive)
+    if (isNaN(copies) || copies <= 0) {
+      console.log("Please enter a valid number of copies greater than 0.");
+      process.exit(1); // Exit if input is invalid
+    }
 
-  // Output the result
-  console.log(`Paint required for ${copies} copies: ${paintRequired.toFixed(2)} liters`);
+    // Calculate the area of one triangle
+    const triangleArea = calculateTriangleArea(width, height);
+
+    // Total area to be painted (for all copies)
+    const totalPaintedArea = triangleArea * copies;
+
+    // Calculate the amount of paint required using the paint calculator
+    const paintRequired = paintRequiredCalculator(totalPaintedArea, coveragePerLiter);
+
+    // Output the result
+    console.log(`Paint required for ${copies} copies: ${paintRequired.toFixed(2)} liters`);
+
+    // Exit the program
+    process.exit(0);  // Exit cleanly after displaying the result
+  });
 }
 
+// Run the program
 main();
